@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-spring-pvc
+spec:
+  volumeName: mysql-spring-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi    

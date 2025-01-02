@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: spring-app
+  labels:
+    my: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      my: spring
+  template:
+    metadata:
+      name: pod-spring-app
+      labels:
+        my: spring
+    spec:
+      containers:
+        - name: cont-spring-app
+          image: adhmabdein/myimgspring
+      ports:
+        - containerPort: 8080
+      env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysqlservice:3306/ecommerce_db
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: password      

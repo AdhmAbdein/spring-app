@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-spring-deploy
+  labels:
+    my: sql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      my: sql
+  template:
+    metadata:
+      name: pod-sql
+      labels:
+        my: sql
+    spec:
+      containers:
+        - name: cont-sql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: sql-vol
+              mountPath: /data
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: MYSQL_DATABASE
+              value: ecommerce_db      
+      volumes:
+        - name: sql-vol
+          persistentVolumeClaim:
+            claimName: mysql-spring-pvc
+
