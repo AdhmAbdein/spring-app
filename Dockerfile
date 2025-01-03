@@ -11,6 +11,10 @@ RUN chmod +x mvnw
 
 RUN ./mvnw clean package -DskipTests
 
+RUN cp .mvn/wrapper/maven-wrapper.jar /app/shopping-cart-application.jar
+
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/shopping-cart-application.jar"]
+CMD ["java", "-jar", "/app/shopping-cart-application.jar"]
+
+
