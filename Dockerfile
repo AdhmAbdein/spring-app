@@ -9,7 +9,7 @@ COPY .mvn .mvn
 
 RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
-RUN cp target/shopping-cart-application.jar /app/shopping-cart-application.jar
+RUN cp .mvn/wrapper/maven-wrapper.jar /app/maven-wrapper.jar
 
 EXPOSE 8080
 
