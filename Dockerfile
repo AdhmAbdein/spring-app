@@ -2,19 +2,15 @@ FROM openjdk:17-alpine
 
 WORKDIR /app
 
-COPY mvnw .
-COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
+COPY mvnw .
+COPY .mvn .mvn
 
-RUN chmod +x mvnw
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
-RUN ./mvnw clean package -DskipTests
-
-RUN cp .mvn/wrapper/maven-wrapper.jar /app/maven-wrapper.jar
+RUN cp target/shopping-cart-application.jar /app/shopping-cart-application.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "/app/maven-wrapper.jar"]
-
-
+CMD ["java", "-jar", "/app/shopping-cart-application.jar"]
